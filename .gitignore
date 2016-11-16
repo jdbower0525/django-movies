@@ -1,0 +1,6 @@
+echo .DS_Store > ../.gitignore
+echo .direnv >> ../.gitignore
+echo .envrc >> ../.gitignore
+echo __pycache__ >> ../.gitignore
+echo secrets.py >> ../.gitignore
+echo db.sqlite3 >> ../.gitignore
