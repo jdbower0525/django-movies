@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Movie Listing</title>
+</head>
+<body>
+    <h1>All Movies</h1>
+    <ul>
+    {% for movie in movies %}
+        <li>
+            <h2><a href="{{ movie.url }}">{{movie.movie_title}}</a></h2>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
