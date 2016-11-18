@@ -1,0 +1,20 @@
+
+
+<html>
+    <head>
+        <title>User Detail</title>
+    </head>
+    <body>
+        <!-- <h1>User Detail</h1> -->
+        <!-- <h2>User ID: {{ rater.pk }}</h2> -->
+        <p>User Age: {{ rater.rater_age }}</p>
+        <p>User Gender: {{ rater.rater_gender }}</p>
+        <p>User Occupation: {{ rater.rater_job }}</p>
+        <p>Zip Code: {{ rater.rater_zip }}</p>
+        <ul>
+        {% for rating in all_ratings %}
+            <h2>{{ rater.id }}: {{ rating.rating }}</h2>
+        {% endfor %}
+        </ul>
+    </body>
+</html>

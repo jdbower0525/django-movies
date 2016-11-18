@@ -1,17 +1,23 @@
 from django.db import models
 from django.db.models import Avg
-from django.contrib.auth.models import User
-import datetime
+from django.urls import reverse
 
 
 class Rater(models.Model):
     rater_age = models.IntegerField(default=0)
     rater_gender = models.CharField(max_length=1)
     rater_job = models.CharField(max_length=20)
-    rater_zip = models.TextField(max_length= 10)
+    rater_zip = models.TextField(max_length=10)
+
+    @property
+    def url(self):
+        return reverse('rater_detail', args=[self.pk])
+
+    def rating_count(self):
+        return self.rating_set.count()
 
     def __repr__(self):
-        return rater_id + ' ' + rater_age
+        return self.rater_job
 
 
 class Movie(models.Model):
@@ -21,7 +27,6 @@ class Movie(models.Model):
     def url(self):
         return reverse('movie_detail', args=[self.pk])
 
-
     def avg_rating(self):
         r_set = self.rating_set.all()
         if len(r_set) == 0:
@@ -30,11 +35,9 @@ class Movie(models.Model):
             dict = r_set.aggregate(Avg('rating'))
             return round(dict["rating__avg"], 2)
 
-
     def __str__(self):
-        return movie_title
+        return self.movie_title
 
-# annuals = models.ForeignKey(Annual, related_name='annuals_ordered', blank=True, null=True)
 
 class Rating(models.Model):
     rater = models.ForeignKey(Rater, on_delete=models.CASCADE)
@@ -43,4 +46,4 @@ class Rating(models.Model):
     time_stamp = models.IntegerField(default=0)
 
     def __repr__(self):
-        return rating
+        return str(self.rating)
