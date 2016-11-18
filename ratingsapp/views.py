@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from ratingsapp import models
+from django.db.models import Avg
 
 
 def index(request):
-    return HttpResponse("Hello, you're at the ratings app index.")
+    return render(request, 'index.html')
 
 
 def movie_listing(request):
@@ -28,3 +28,14 @@ def rater_detail(request, d):
     # movie = models.Movie.objects.get(pk=all_ratings.movie_id)
     return render(request, 'rater_detail.html',
                   {'rater': rater, 'all_ratings': all_ratings})
+
+
+def top_20(request):
+    avg_list = models.Movie.objects.annotate(
+            avg_rating=Avg('rating__rating')).order_by('-avg_rating')[:20]
+    return render(request, 'top_20.html', {'avg_list': avg_list})
+
+
+#
+# auths = Author.objects.order_by('-score')[:30]
+# ordered = sorted(auths, key=operator.attrgetter('last_name'))

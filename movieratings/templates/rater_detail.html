@@ -13,7 +13,7 @@
         <p>Zip Code: {{ rater.rater_zip }}</p>
         <ul>
         {% for rating in all_ratings %}
-            <h2>{{ rater.id }}: {{ rating.rating }}</h2>
+            <p><a href="{{ rating.movie.url }}">{{ rating.movie }}: {{ rating.rating }}</a></p>
         {% endfor %}
         </ul>
     </body>

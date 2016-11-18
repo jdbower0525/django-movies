@@ -32,8 +32,8 @@ class Movie(models.Model):
         if len(r_set) == 0:
             return 0
         else:
-            dict = r_set.aggregate(Avg('rating'))
-            return round(dict["rating__avg"], 2)
+            average = r_set.aggregate(Avg('rating'))
+            return round(average["rating__avg"], 2)
 
     def __str__(self):
         return self.movie_title
