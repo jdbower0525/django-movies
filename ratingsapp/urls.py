@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from . import views
 import ratingsapp
 
@@ -13,5 +15,6 @@ urlpatterns = [
     url((r'^rater_listing$'), ratingsapp.views.rater_listing,
         name='rater_listing'),
     url((r'^top20$'), ratingsapp.views.top_20,
-        name='top20')
+        name='top20'),
+    # url((r'^login$'), ratingsapp.views.login, name="login"),
 ]

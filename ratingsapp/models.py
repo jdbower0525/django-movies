@@ -1,6 +1,9 @@
 from django.db import models
 from django.db.models import Avg
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 class Rater(models.Model):
@@ -8,6 +11,16 @@ class Rater(models.Model):
     rater_gender = models.CharField(max_length=1)
     rater_job = models.CharField(max_length=20)
     rater_zip = models.TextField(max_length=10)
+    # user = models.OneToOneField(User, null=True)
+
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Rater.objects.create(user=instance)
+    #
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.rater.save()
 
     @property
     def url(self):
@@ -47,3 +60,14 @@ class Rating(models.Model):
 
     def __repr__(self):
         return str(self.rating)
+
+
+def fill_users():
+    for r in Rater.objects.all():
+        rid = "R"+str(r.id)
+        r.user = User.objects.create_user(
+            username=rid, email="a@example.org", password="pass"
+        )
+        r.user.set_password("pass")
+        r.user.save()
+        r.save()

@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+LOGIN_REDIRECT_URL = 'user_profile'
 INSTALLED_APPS = [
     'ratingsapp.apps.RatingsappConfig',
     'django.contrib.admin',
@@ -55,7 +55,10 @@ ROOT_URLCONF = 'movieratings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'movieratings/templates')],
+        'DIRS': [
+                os.path.join(BASE_DIR, 'movieratings/templates'),
+                os.path.join(BASE_DIR, 'movieratings/templates/registration')
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
