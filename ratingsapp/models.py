@@ -11,7 +11,7 @@ class Rater(models.Model):
     rater_gender = models.CharField(max_length=1)
     rater_job = models.CharField(max_length=20)
     rater_zip = models.TextField(max_length=10)
-    # user = models.OneToOneField(User, null=True)
+    user = models.OneToOneField(User, null=True)
 
     # @receiver(post_save, sender=User)
     # def create_user_profile(sender, instance, created, **kwargs):

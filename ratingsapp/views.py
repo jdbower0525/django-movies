@@ -3,6 +3,8 @@ from ratingsapp import models
 from django.db.models import Avg
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.conf.urls import include
+
 
 def index(request):
     return render(request, 'index.html')
@@ -18,11 +20,6 @@ def movie_detail(request, d):
     all_ratings = movie.rating_set.order_by("-rating")
     return render(request, 'movie_detail.html',
                   {'movie': movie, 'all_ratings': all_ratings})
-
-
-def login(request):
-    if success:
-        return HttpResponseRedirect(reverse('user_detail.view'))
 
 
 def rater_listing(request):

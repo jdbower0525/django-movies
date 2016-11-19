@@ -1,11 +1,19 @@
-{% extends 'rater_detail.html' %}
 
 
 <html>
 <head>
+    <title>User Profile</title>
+
 </head>
-    <body>
-        <p> this is your profile, {{user.username }}.</p>
-        <p>        {{ rater.rater_gender }}  </p>
-    </body>
-    </html>
+<body>
+    {% block content %}
+    <h1>User Detail</h1>
+    <h2>User ID: {{ rater.pk }}</h2>
+    <p>User Age: {{ rater.rater_age }}</p>
+    <p>User Gender: {{ rater.rater_gender }}</p>
+    <p>User Occupation: {{ rater.rater_job }}</p>
+    <p>Zip Code: {{ rater.rater_zip }}</p>
+    <p> This is your user profile </p>
+    {% endblock %}
+</body>
+</html>
