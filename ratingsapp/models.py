@@ -9,16 +9,8 @@ class Rater(models.Model):
     rater_gender = models.CharField(max_length=1)
     rater_job = models.CharField(max_length=20)
     rater_zip = models.TextField(max_length=10)
-    # user = models.OneToOneField(User, null=True)
+    user = models.OneToOneField(User, null=True)
 
-    # @receiver(post_save, sender=User)
-    # def create_user_profile(sender, instance, created, **kwargs):
-    #     if created:
-    #         Rater.objects.create(user=instance)
-    #
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-    #     instance.rater.save()
 
     @property
     def url(self):
@@ -57,8 +49,21 @@ class Rating(models.Model):
     time_stamp = models.IntegerField(default=0)
 
     def __repr__(self):
-        return str(self.rating)
+        return str(self.rating) + str(self.movie)
 
+# class UserProfile(models.Model):
+#     # This field is required.
+#     rater_age = models.IntegerField(default=0)
+#     rater_gender = models.CharField(max_length=1)
+#     rater_job = models.CharField(max_length=20)
+#     rater_zip = models.TextField(max_length=10)
+#     user = models.OneToOneField(User)
+#
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)
+#
+#     post.save.connect(create_user_profile, sender=User)
 
 def fill_users():
     for r in Rater.objects.all():

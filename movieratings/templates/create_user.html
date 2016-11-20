@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Create User</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css"
+    href="{% static 'movieapp/create_user.css' %}"/>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div id="create_user">
+            {{ form }}
+            <input type="submit" value="Create new user account" />
+        </div>
+    </form>
+
+</body>
+</html>

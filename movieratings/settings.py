@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 LOGIN_REDIRECT_URL = 'user_profile'
+
 INSTALLED_APPS = [
     'ratingsapp.apps.RatingsappConfig',
     'django.contrib.admin',
@@ -51,6 +52,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'movieratings.urls'
+
+# AUTH_PROFILE_MODULE = 'ratingsapp.UserProfile'
 
 TEMPLATES = [
     {

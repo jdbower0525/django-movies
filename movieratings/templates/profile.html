@@ -1,19 +1,18 @@
 
-
 <html>
+{% include 'rater_detail.html' %}
+{% block content %}
+
 <head>
     <title>User Profile</title>
-
 </head>
 <body>
-    {% block content %}
-    <h1>User Detail</h1>
-    <h2>User ID: {{ rater.pk }}</h2>
-    <p>User Age: {{ rater.rater_age }}</p>
-    <p>User Gender: {{ rater.rater_gender }}</p>
-    <p>User Occupation: {{ rater.rater_job }}</p>
-    <p>Zip Code: {{ rater.rater_zip }}</p>
-    <p> This is your user profile </p>
-    {% endblock %}
+    <p>These are the movies you've rated:</p>
+    {% for rating in request.user.rater.rating_set.all %}
+    <li>
+    <p><a href="{{ movie.url }}">{{ rating.movie }}</a></p>
+    </li>
+    {% endfor %}
 </body>
+{% endblock %}
 </html>

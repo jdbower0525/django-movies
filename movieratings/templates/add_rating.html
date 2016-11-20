@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Add Rating</title>
+</head>
+<body>
+
+  <h2>Add Rating</h2>
+  <form method="POST" action="{% url 'add_rating' %}">
+    {% csrf_token %}
+    <p>Movie ID of the movie you are trying to rate</p>
+    <input movie="movie" type="text" name="movie" value="{{ movie }}">
+    <p>Add a new rating (1-5)</p>
+    <input rating="rating" type="text" name="rating" value="{{ rating }}">
+    <p></p>
+    <input type="submit" name="submit" value="Add your rating"/>
+  </form>
+
+</body>
+</html>

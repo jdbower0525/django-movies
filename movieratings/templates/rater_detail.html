@@ -1,19 +1,21 @@
 
 <html>
+{% block content %}
     <head>
         <title>User Detail</title>
     </head>
     <body>
         <h1>User Detail</h1>
-        <h2>User ID: {{ rater.pk }}</h2>
-        <p>User Age: {{ rater.rater_age }}</p>
-        <p>User Gender: {{ rater.rater_gender }}</p>
-        <p>User Occupation: {{ rater.rater_job }}</p>
-        <p>Zip Code: {{ rater.rater_zip }}</p>
+        <h2>User ID: {{ user.id }}</h2>
+        <p>User Age: {{ user.rater.rater_age }}</p>
+        <p>User Gender: {{ user.rater.rater_gender }}</p>
+        <p>User Occupation: {{ user.rater.rater_job }}</p>
+        <p>Zip Code: {{ user.rater.rater_zip }}</p>
         <ul>
         {% for rating in all_ratings %}
             <p><a href="{{ rating.movie.url }}">{{ rating.movie }}: {{ rating.rating }}</a></p>
         {% endfor %}
         </ul>
     </body>
+{% endblock %}
 </html>
