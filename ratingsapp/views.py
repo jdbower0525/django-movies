@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from ratingsapp import models
 from django.db.models import Avg
 from django.http import HttpResponseRedirect

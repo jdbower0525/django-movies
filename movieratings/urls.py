@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
 
+
 urlpatterns = [
     url(r'^ratingsapp/', include('ratingsapp.urls')),
     url(r'^login/$', auth_views.login, name='login'),
