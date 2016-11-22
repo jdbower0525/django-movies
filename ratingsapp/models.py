@@ -8,7 +8,7 @@ class Rater(models.Model):
     rater_age = models.IntegerField(default=0)
     rater_gender = models.CharField(max_length=1)
     rater_job = models.CharField(max_length=20)
-    rater_zip = models.TextField(max_length=10)
+    rater_zip = models.CharField(max_length=10)
     user = models.OneToOneField(User, null=True)
 
 
@@ -19,12 +19,12 @@ class Rater(models.Model):
     def rating_count(self):
         return self.rating_set.count()
 
-    def __repr__(self):
-        return self.rater_job
+    def __str__(self):
+        return str(self.id)
 
 
 class Movie(models.Model):
-    movie_title = models.TextField(max_length=100)
+    movie_title = models.CharField(max_length=100)
 
     @property
     def url(self):
@@ -48,8 +48,16 @@ class Rating(models.Model):
     rating = models.FloatField(default=0)
     time_stamp = models.IntegerField(default=0)
 
-    def __repr__(self):
+    def __str__(self):
         return str(self.rating) + str(self.movie)
+
+
+class RatingForm(models.Model):
+    pass
+
+class UserForm(models.Model):
+    pass
+
 
 # class UserProfile(models.Model):
 #     # This field is required.

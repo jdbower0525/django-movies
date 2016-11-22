@@ -1,6 +1,12 @@
+{% extends "base.html" %}
+
 <html>
+{% block content %}
     <head>
         <title>Movie Detail</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css"
+        href="{% static '/ratingsapp/movie_detail.css'}"
     </head>
     <body>
         <h1>Movie Detail</h1>
@@ -8,7 +14,8 @@
         <h2>Movie Title: {{ movie.movie_title }}</h2>
         <h2>Average Rating: {{ movie.avg_rating }}</h2>
         {% for rating in all_ratings %}
-            <p><a href="{{ rating.rater.url }}">{{ rating.rater_id }}: {{ rating.rating }}</a></p>
+            <p><a href="{{ rating.rater.url }}">{{ rating.rater_id }}</a>: {{ rating.rating }}</p>
         {% endfor %}
     </body>
+{% endblock %}
 </html>

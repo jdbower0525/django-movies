@@ -1,4 +1,6 @@
+{% extends "base.html" %}
 <html>
+{% block content %}
     <head>
         <title>Top 20 Movies</title>
     </head>
@@ -10,4 +12,5 @@
             <p>{{ movie.avg_rating|floatformat }}</p>
         {% endfor %}
     </body>
+{% endblock %}
 </html>

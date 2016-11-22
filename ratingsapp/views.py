@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login
-from ratingsapp.models import *
+from ratingsapp import models
+from .models import Rating
 from django.db.models import Avg
 from django.views import generic
 from django.http import HttpResponseRedirect
@@ -45,15 +46,25 @@ def top_20(request):
 
 
 def create_user(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create_user(**form.cleaned_data)
+    if request.method == "GET":
+        user_form = UserForm()
+        rater_form = RaterForm()
+    elif request.method == "POST":
+        user_form = UserForm(request.POST)
+        rater_form = RaterForm(request.POST)
+        if user_form.is_valid() and rater_form.is_valid():
+            user = user_form.save
+            rater = rater_form.save(commit=False)
+            rater.user = user
+            rater.save()
+            login(request, user)
+            password = user.password
+            user.set_password(password)
+            user.save()
+            user = authenticate(username = user.username, password =password)
             login(request, user)
             return HttpResponseRedirect('/accounts/profile/')
-    else:
-        form = UserForm()
-    return render(request, 'create_user.html', {'form': form})
+    return render(request, 'create_user.html', {'user_form': user_form, 'rater_form': rater_form})
 
 
 def profile(request):
@@ -61,23 +72,17 @@ def profile(request):
 
 
 def add_rating(request):
-    user = request.user
-    rater = user.rater
-    form = RatingForm(request.POST)
     if request.method == 'POST':
+        form = RatingForm(request.POST)
         if form.is_valid():
-            rater = user
-            new_movie = form.cleaned_data['movie']
-            new_rating = form.cleaned_data['rating']
-            timestamp = 5
-            new_rating = Rating.object.create(rater=rater,
-                                              movie=new_movie,
-                                              rating=new_rating,
-                                              timestamp=timestamp
-                                              )
+            new_rating = RatingForm(request.POST)
             new_rating.save()
-    return render(request, "add_rating.html")
-### example
+            return HttpResponseRedirect('/ratingsapp/accounts/profile/')
+    else:
+        form = RatingForm()
+        return render(request, "add_rating.html", {'form': form})
+
+# example
 # def add_dinner(request):
 #     if request.method == 'POST':
 #         form = DinnerForm(request.POST)

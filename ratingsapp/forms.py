@@ -8,7 +8,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'password']
 
 
 class RaterForm(forms.ModelForm):
@@ -20,7 +20,8 @@ class RaterForm(forms.ModelForm):
 class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
-        fields = ('rating', )
+        #fields = ['rater', 'movie', 'rating', 'time_stamp']
+        fields = '__all__'
 
 
 class LoginForm(forms.ModelForm):

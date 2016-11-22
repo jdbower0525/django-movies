@@ -1,18 +1,24 @@
 
 <html>
-{% include 'rater_detail.html' %}
-{% block content %}
 
+{% block content %}
+{% include 'rater_detail.html' %}
 <head>
     <title>User Profile</title>
 </head>
 <body>
-    <p>These are the movies you've rated:</p>
+    <table>
+        <tr>
+
+        </tr>
     {% for rating in request.user.rater.rating_set.all %}
-    <li>
-    <p><a href="{{ movie.url }}">{{ rating.movie }}</a></p>
-    </li>
+        <tr>
+            <td><a href="{{ rating.movie.url }}">{{ rating.movie }}</a></td>
+
+            <td>{{ rating.rating }}</td>
+        </tr>
     {% endfor %}
+    </table>
 </body>
 {% endblock %}
 </html>

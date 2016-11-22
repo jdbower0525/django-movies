@@ -1,19 +1,22 @@
+{% extends "base.html" %}
 <html>
+{% block content %}
 <head>
 <title>Create User</title>
-
-    {% load static %}
-    <link rel="stylesheet" type="text/css"
-    href="{% static 'movieapp/create_user.css' %}"/>
 </head>
 <body>
+    <center>
+        <div style="width:15%;">
+            <h2>Create</h2>
     <form method="post" action="">
         {% csrf_token %}
-        <div id="create_user">
-            {{ form }}
-            <input type="submit" value="Create new user account" />
-        </div>
+        {{ user_form }}<br>
+        {{ rater_form }}<br>
+        <input type="submit" value="Create new user account"<br>
+    </div><br>
     </form>
-
+</div>
+</center>
 </body>
+{% endblock %}
 </html>

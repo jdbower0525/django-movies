@@ -1,21 +1,36 @@
-
+{% extends 'base.html' %}
 <html>
 {% block content %}
     <head>
         <title>User Detail</title>
     </head>
     <body>
+        <center>
+            <div class="jumbotron" min-height: 250px>
         <h1>User Detail</h1>
         <h2>User ID: {{ user.id }}</h2>
         <p>User Age: {{ user.rater.rater_age }}</p>
         <p>User Gender: {{ user.rater.rater_gender }}</p>
         <p>User Occupation: {{ user.rater.rater_job }}</p>
         <p>Zip Code: {{ user.rater.rater_zip }}</p>
-        <ul>
+    </div>
+</center>
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>Movie Name </th>
+                <th> Rating </th>
+            </tr>
         {% for rating in all_ratings %}
-            <p><a href="{{ rating.movie.url }}">{{ rating.movie }}: {{ rating.rating }}</a></p>
+            <tr>
+                <td><a href="{{ rating.movie.url }}">{{ rating.movie }}</td>
+
+                <td>{{ rating.rating }}</td>
+            </tr>
         {% endfor %}
-        </ul>
+        </table>
+
     </body>
 {% endblock %}
 </html>
