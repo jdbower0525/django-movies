@@ -53,7 +53,7 @@ def create_user(request):
         user_form = UserForm(request.POST)
         rater_form = RaterForm(request.POST)
         if user_form.is_valid() and rater_form.is_valid():
-            user = user_form.save
+            user = user_form.save()
             rater = rater_form.save(commit=False)
             rater.user = user
             rater.save()
